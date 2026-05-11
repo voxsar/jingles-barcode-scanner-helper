@@ -30,9 +30,10 @@ jobs:
 
       - name: Prepare release asset
         env:
+          REPOSITORY_NAME: ${{ github.event.repository.name }}
           TAG_NAME: ${{ github.event.release.tag_name }}
         run: |
-          APK_NAME="jingles-barcode-scanner-helper-${TAG_NAME}-debug.apk"
+          APK_NAME="${REPOSITORY_NAME}-${TAG_NAME}-debug.apk"
           cp app/build/outputs/apk/debug/app-debug.apk "$APK_NAME"
           echo "APK_PATH=$APK_NAME" >> "$GITHUB_ENV"
 
