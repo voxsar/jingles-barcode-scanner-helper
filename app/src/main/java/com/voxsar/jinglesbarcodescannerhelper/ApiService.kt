@@ -43,7 +43,7 @@ class ApiService {
                 connection.errorStream
             }
             val responseBody = responseStream?.let { stream ->
-                InputStreamReader(stream, StandardCharsets.UTF_8).use(BufferedReader::readText)
+                BufferedReader(InputStreamReader(stream, StandardCharsets.UTF_8)).use(BufferedReader::readText)
             }.orEmpty()
             SubmissionResult(
                 isSuccessful = connection.responseCode in 200..299,
