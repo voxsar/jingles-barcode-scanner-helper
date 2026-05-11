@@ -48,7 +48,8 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           if ! gh release view "${TAG_NAME}" > /dev/null 2>&1; then
-            gh release create "${TAG_NAME}" --title "${TAG_NAME}" --prerelease --notes "Automated debug APK upload."
+            RUN_URL="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+            gh release create "${TAG_NAME}" --title "${TAG_NAME}" --prerelease --notes "Automated debug APK upload from ${RUN_URL}."
           fi
 
       - name: Upload debug APK to release
